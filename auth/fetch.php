@@ -17,7 +17,7 @@
 			die("Multiple users with the same username.");
 		}
 		$accountPermissions = array();
-		foreach($user["types"] as $type) {
+		foreach(unserialize($user["types"]) as $type) {
 			$query = sqlite_query($db, "SELECT * FROM account_types WHERE type = '$type' LIMIT 2");
 			$accountPerms = sqlite_fetch_array($query);
 			$permissions = unserialize($accountPerms["permissions"]);
