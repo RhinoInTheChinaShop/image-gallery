@@ -8,6 +8,13 @@
 	$installed = true;
 	
 	/*
+	 * The root location should be set to the path to the gallery directory, from the web.
+	 * If it is the root folder, the root location should just be /,
+	 * otherwise if the web path is something like /gallery/, the root location should be /gallery/.
+	 */
+	$rootLocation = "/";
+	
+	/*
 	 * The database location should be changed to outside the web root.
 	 */
 	$dbLocation = "db.sqlite";
