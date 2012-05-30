@@ -6,4 +6,9 @@
 	 */
 	
 	$installed = true;
+	
+	/*
+	 * The database location should be changed to outside the web root.
+	 */
+	$dbLocation = "db.sqlite";
 ?>
