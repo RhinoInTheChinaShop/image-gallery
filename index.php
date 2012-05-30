@@ -48,7 +48,7 @@ EOD;
 			You are not logged in.  Login below to see private pictures, and get access to commenting, and many other features.<br />
 			<form action="{$rootLocation}auth/login/" method="POST">
 				Username: <input type="text" name="username" /><br />
-				Password: <input type="text" name="password" /><br />
+				Password: <input type="password" name="password" /><br />
 				<input type="submit" value="Login" />
 			</form>
 EOD;
