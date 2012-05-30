@@ -31,4 +31,16 @@ EOD;
 	 * <PAGE> will be replaced with the current page name
 	 */
 	$pageTitleTemplate = "<PAGE> | Image Gallery";
+	
+	/*
+	 * If you want to allow anyone to register an account, set to true
+	 */
+	$allowPublicRegistration = false;
+	
+	/*
+	 * Account type name of public registrations.
+	 * It is suggested to set public registrations to a guest account,
+	 * so guests can't upload pictures.
+	 */
+	$defaultAccountType = "guest";
 ?>
