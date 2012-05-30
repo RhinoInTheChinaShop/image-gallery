@@ -1,7 +1,7 @@
 <?php
 	/*
 	 * index.php
-	 * Bootstraps installer if the gallery is not installed, otherwise bootstraps gallery.
+	 * Bootstraps installer if the gallery is not installed, otherwise displays the homepage of the gallery.
 	 */
 	
 	/*
@@ -17,4 +17,5 @@
 		exit;
 	}
 	
+	require("auth/fetch.php");
 ?>
