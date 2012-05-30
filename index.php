@@ -30,6 +30,18 @@
 	</head>
 	<body>
 		<h1>Image Gallery Home</h1>
+		<?php
+			if(isset($_GET["action"])) {
+				$actionMessage = {"logoutSuccess":"You sucessfully logged out."}[$_GET["action"];
+				if($actionMessage) {
+					echo <<<EOD
+		<div id="actionMessage">
+			$actionMessage
+		</div>
+EOD;
+				}
+			}
+		?>
 		<?php echo $homepageDescription; ?><hr />
 		<div class="left userLogin">
 			<?php
