@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	/*
 	 * index.php
 	 * Bootstraps installer if the gallery is not installed, otherwise displays the homepage of the gallery.
@@ -52,14 +53,14 @@ EOD;
 					echo <<<EOD
 			<img src="{$rootLocation}/pictures/?picture=$profilePicture" class="left profilePicture" alt="$realName's profile picture" />
 			Logged in as $realName.<br />
-			<a href="{$rootLocation}auth/logout/" class="right">Logout</a>
+			<a href="{$rootLocation}auth/logout.php" class="right">Logout</a>
 EOD;
 				}
 				else {
 					echo <<<EOD
 			<h4>Login</h4>
 			You are not logged in.  Login below to see private pictures, and get access to commenting, and many other features.<br />
-			<form action="{$rootLocation}auth/login/" method="POST">
+			<form action="{$rootLocation}auth/login.php" method="POST">
 				Username: <input type="text" name="username" /><br />
 				Password: <input type="password" name="password" /><br />
 				<input type="submit" value="Login" />
