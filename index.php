@@ -18,4 +18,18 @@
 	}
 	
 	require("auth/fetch.php");
+	require("page.php");
+	
 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><?php echo parsePageTitle("Home"); ?></title>
+		<link rel="stylesheet" type="text/css" href="resources/page.css" />
+		<script type="text/javascript" src="resources/home.js"></script>
+	</head>
+	<body>
+		<h1>Image Gallery Home</h1>
+		<?php echo $homepageDescription; ?>
+	</body>
+</html>
