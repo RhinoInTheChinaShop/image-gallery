@@ -20,7 +20,7 @@
 		foreach($user["types"] as $type) {
 			$query = sqlite_query($db, "SELECT * FROM account_types WHERE type = '$type' LIMIT 2");
 			$accountPerms = sqlite_fetch_array($query);
-			$permissions = $accountPerms["permissions"];
+			$permissions = unserialize($accountPerms["permissions"]);
 			array_merge($accountPermissions, $permissions);
 		}
 	}
