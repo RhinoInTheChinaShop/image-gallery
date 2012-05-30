@@ -33,7 +33,7 @@
 		<h1>Image Gallery Home</h1>
 		<?php
 			if(isset($_GET["action"])) {
-				$actionMessages = array("logoutSuccess"=>"You sucessfully logged out.");
+				$actionMessages = array("logoutSuccess"=>"You successfully logged out.", "loginSuccess"=>"You have successfully logged in.");
 				$actionMessage = $actionMessages[$_GET["action"]];
 				if($actionMessage) {
 					echo <<<EOD
