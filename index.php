@@ -69,5 +69,28 @@ EOD;
 				}
 			?>
 		</div>
+		<div id="events">
+			<?php
+				if(!$db) {
+					if(!$db = sqlite_open($databaseLocation, 0666, $dbError)) {
+						die("Error connecting to the database: $dbError");
+					}
+				}
+				/*
+				 * turns an array of roles into a regex for any of the roles or public
+				 */
+				function rolesRegexGenerator($rs) {
+					$out = "";
+					foreach($rs as $r) {
+						$out .= ".*$r.*||";
+					}
+					return $out."public";
+				}
+				$roles = $user ? rolesRegexGenerator(unserialize($user["roles"])) : array("public");
+				$tempEventLimit = ($allowUserChangeEventLimit && isset($_GET["itemLimit"])) ? sqlite_escape_string($_GET["itemLimit"]) : sqlite_escape_string($eventLimit);
+				$tempOffset = (isset($_GET["page"])) ? sqlite_escape_string($tempEventLimit * $_GET["page"]) : 0;
+				sqlite_regex_query($db, "SELECT * FROM events WHERE regexp(allowed_types, '$roles') LIMIT $tempEventLimit OFFSET $tempOffset");
+			?>
+		</div>
 	</body>
 </html>

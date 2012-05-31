@@ -48,4 +48,16 @@ EOD;
 	 * The location of the default picture, if the user hasn't set one
 	 */
 	$defaultProfilePicture = "";
+	
+	/*
+	 * Allows the user to change the number of events per page on the homepage
+	 * (The default is below)
+	 */
+	$allowUserChangeEventLimit = true;
+	
+	/*
+	 * The number of events to display per page on the homepage
+	 * (can be changed by the user if $allowUserChangeEventLimit is set to true above)
+	 */
+	$eventLimit = 20;
 ?>
