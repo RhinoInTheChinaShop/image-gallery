@@ -29,8 +29,9 @@ CREATE TABLE users (id INTEGER PRIMARY KEY, username, password, displayname, typ
 CREATE TABLE account_types (id INTEGER PRIMARY KEY, name, permissions);
 INSERT INTO users (username, password, types, displayname) VALUES ('$user', '$password', '$types', 'Administrator');
 INSERT INTO account_types (name, permissions) VALUES ('root', '$rootPermissions');
-CREATE TABLE events (id INTEGER PRIMARY KEY, name, dateStart, dateEnd, allowedAccountTypes, password, people, thumbnailImage, location, tags);
-CREATE TABLE shots (id INTEGER PRIMARY KEY, shortDescription, longDescription, thumbnailPhoto, thumbnailURL, shots, event, location, tags);
+CREATE TABLE events (id INTEGER PRIMARY KEY, name, dateStart, dateEnd, allowedAccountTypes, password, people, thumbnailImage, location, tags, days);
+CREATE TABLE days (id INTEGER PRIMARY KEY, name, date, people, thumbnailShot, thubnailURL, shots, location, tags);
+CREATE TABLE shots (id INTEGER PRIMARY KEY, shortDescription, longDescription, thumbnailPhoto, thumbnailURL, people, photos, day, location, tags);
 CREATE TABLE photos (id INTEGER PRIMARY KEY, fullsizedURL, smallURL, thumbnailURL, shortDescription, longDescription, user, shot, location, tags, people);
 CREATE TABLE comments (id INTEGER PRIMARY KEY, itemType, commentTitle, commentBody, commentAuthor);
 EOD;
