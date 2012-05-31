@@ -14,7 +14,7 @@
 	 * Basic settings for the root user account
 	 */
 	$user = "root";
-	$password = "root";
+	$password = sha1("root");
 	$types = serialize(array("root"));
 	
 	/*
@@ -25,10 +25,14 @@
 	 * Create the tables, and insert the first items
 	 */
 	$command = <<<EOD
-CREATE TABLE users (id INTEGER PRIMARY KEY, username, password, types);
+CREATE TABLE users (id INTEGER PRIMARY KEY, username, password, displayname, types, profilePicture, firstName, lastName);
 CREATE TABLE account_types (id INTEGER PRIMARY KEY, name, permissions);
-INSERT INTO users (username, password, types) VALUES ('$user', '$password', '$types');
+INSERT INTO users (username, password, types, displayname) VALUES ('$user', '$password', '$types', 'Administrator');
 INSERT INTO account_types (name, permissions) VALUES ('root', '$rootPermissions');
+CREATE TABLE events (id INTEGER PRIMARY KEY, name, dateStart, dateEnd, allowedAccountTypes, password, people, thumbnailImage, location, tags);
+CREATE TABLE shots (id INTEGER PRIMARY KEY, shortDescription, longDescription, thumbnailPhoto, thumbnailURL, shots, event, location, tags);
+CREATE TABLE photos (id INTEGER PRIMARY KEY, fullsizedURL, smallURL, thumbnailURL, shortDescription, longDescription, user, shot, location, tags, people);
+CREATE TABLE comments (id INTEGER PRIMARY KEY, itemType, commentTitle, commentBody, commentAuthor);
 EOD;
 	sqlite_exec($db, $command, $error);
 	if($error) {
