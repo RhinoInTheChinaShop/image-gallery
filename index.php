@@ -49,9 +49,9 @@ EOD;
 			<?php
 				if($user) {
 					$realName = html_entity_decode($user["displayname"]);
-					$profilePicture = $user["profilepic"];
+					$profilePicture = (isset($user["profilePic"]) || $user["profilePic"] !== "") ? "{$rootLocation}/pictures/?picture=".$user["profilePic"] : $defaultProfilePicture;
 					echo <<<EOD
-			<img src="{$rootLocation}/pictures/?picture=$profilePicture" class="left profilePicture" alt="$realName's profile picture" />
+			<img src="$profilePicture" class="left profilePicture" alt="$realName's profile picture" />
 			Logged in as $realName.<br />
 			<a href="{$rootLocation}auth/logout.php" class="right">Logout</a>
 EOD;

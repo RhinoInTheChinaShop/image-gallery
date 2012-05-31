@@ -43,4 +43,9 @@ EOD;
 	 * so guests can't upload pictures.
 	 */
 	$defaultAccountType = "guest";
+	
+	/*
+	 * The location of the default picture, if the user hasn't set one
+	 */
+	$defaultProfilePicture = "";
 ?>
