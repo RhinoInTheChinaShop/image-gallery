@@ -5,8 +5,10 @@
 	
 	if(isset($_SESSION["auth"])) {
 		$username = sqlite_escape_string($_SESSION["username"]);
-		if(!$db = sqlite_open($dbLocation, 0666, $dbError)) {
-			die("Error with the database: ".$dbError);
+		if(!$db) {
+			if(!$db = sqlite_open($dbLocation, 0666, $dbError)) {
+				die("Error with the database: ".$dbError);
+			}
 		}
 		$query = sqlite_query($db, "SELECT * FROM users WHERE username = '$username' LIMIT 2");
 		$user = sqlite_fetch_array($query);
