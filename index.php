@@ -58,7 +58,7 @@ EOD;
 				 * Displays the user's details if the user is logged in, otherwise displays a login box.
 				 */
 				if($user) {
-					$realName = html_entity_decode($user["displayname"]);
+					$realName = htmlentities($user["displayname"]);
 					$profilePicture = (isset($user["profilePic"]) || $user["profilePic"] !== "") ? "{$rootLocation}/pictures/?picture=".$user["profilePic"] : $defaultProfilePicture;
 					echo <<<EOD
 			<img src="$profilePicture" class="left profilePicture" alt="$realName's profile picture" />
@@ -102,7 +102,18 @@ EOD;
 				$roles = $user ? rolesRegexGenerator(unserialize($user["roles"])) : array("public");
 				$tempEventLimit = ($allowUserChangeEventLimit && isset($_GET["itemLimit"])) ? sqlite_escape_string($_GET["itemLimit"]) : sqlite_escape_string($eventLimit);
 				$tempOffset = (isset($_GET["page"])) ? sqlite_escape_string($tempEventLimit * $_GET["page"]) : 0;
-				sqlite_regex_query($db, "SELECT * FROM events WHERE regexp(allowed_types, '$roles') LIMIT $tempEventLimit OFFSET $tempOffset");
+				$query = sqlite_regex_query($db, "SELECT * FROM events WHERE regexp(allowed_types, '$roles') LIMIT $tempEventLimit OFFSET $tempOffset");
+				while($event = sqlite_fetch_array($query)) {
+					$imageLink = htmlentities("{$rootLocation}albums/?album=".$event["id"]);
+					$thumbnailURL = htmlentities($event["thumbnailURL"]);
+					$text = htmlentities($event["name"]);
+					echo <<<EOD
+			<a href="$imageLink" id="albumImage">
+				<img src="$thumbnailURL" alt="$text" /><br />
+				$text<br />
+			</a>
+EOD;
+				}
 			?>
 		</div>
 	</body>
