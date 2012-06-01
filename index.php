@@ -80,41 +80,69 @@ EOD;
 			?>
 		</div>
 		<div id="events">
-			<?php
-				/*
-				 * Opens a connection to the database, if the database is not already open.
-				 */
-				if(!$db) {
-					if(!$db = sqlite_open($databaseLocation, 0666, $dbError)) {
-						die("Error connecting to the database: $dbError");
+			<div id="eventThumbnails">
+				<?php
+					/*
+					 * Opens a connection to the database, if the database is not already open.
+					 */
+					if(!$db) {
+						if(!$db = sqlite_open($databaseLocation, 0666, $dbError)) {
+							die("Error connecting to the database: $dbError");
+						}
 					}
-				}
-				/*
-				 * turns an array of roles into a regex for any of the roles or public, made for users who are logged in.
-				 */
-				function rolesRegexGenerator($rs) {
-					$out = "";
-					foreach($rs as $r) {
-						$out .= ".*$r.*||";
+					/*
+					 * turns an array of roles into a regex for any of the roles or public, made for users who are logged in.
+					 */
+					function rolesRegexGenerator($rs) {
+						$out = "";
+						foreach($rs as $r) {
+							$out .= ".*$r.*||";
+						}
+						return $out."public";
 					}
-					return $out."public";
-				}
-				$roles = $user ? rolesRegexGenerator(unserialize($user["roles"])) : array("public");
-				$tempEventLimit = ($allowUserChangeEventLimit && isset($_GET["itemLimit"])) ? sqlite_escape_string($_GET["itemLimit"]) : sqlite_escape_string($eventLimit);
-				$tempOffset = (isset($_GET["page"])) ? sqlite_escape_string($tempEventLimit * $_GET["page"]) : 0;
-				$query = sqlite_regex_query($db, "SELECT * FROM events WHERE regexp(allowed_types, '$roles') LIMIT $tempEventLimit OFFSET $tempOffset");
-				while($event = sqlite_fetch_array($query)) {
-					$imageLink = htmlentities("{$rootLocation}albums/?album=".$event["id"]);
-					$thumbnailURL = htmlentities($event["thumbnailURL"]);
-					$text = htmlentities($event["name"]);
-					echo <<<EOD
-			<a href="$imageLink" id="albumImage">
-				<img src="$thumbnailURL" alt="$text" /><br />
-				$text<br />
-			</a>
+					$roles = $user ? rolesRegexGenerator(unserialize($user["roles"])) : array("public");
+					$tempEventLimit = ($allowUserChangeEventLimit && isset($_GET["itemLimit"])) ? sqlite_escape_string($_GET["itemLimit"]) : sqlite_escape_string($eventLimit);
+					$tempOffset = (isset($_GET["page"])) ? sqlite_escape_string($tempEventLimit * $_GET["page"]) : 0;
+					$query = sqlite_regex_query($db, "SELECT * FROM events WHERE regexp(allowed_types, '$roles') LIMIT $tempEventLimit OFFSET $tempOffset");
+					while($event = sqlite_fetch_array($query)) {
+						$imageLink = htmlentities("{$rootLocation}albums/?album=".$event["id"]);
+						$thumbnailURL = htmlentities($event["thumbnailURL"]);
+						$text = htmlentities($event["name"]);
+						echo <<<EOD
+				<a href="$imageLink" id="albumImage">
+					<img src="$thumbnailURL" alt="$text" /><br />
+					$text<br />
+				</a>
 EOD;
-				}
-			?>
+					}
+				?>
+			</div>
+			<div id="eventDisplayControls">
+				<?php
+					/*
+					 * Add events per page control to page if the user is allowed to change the limit
+					 * TODO: make the currently selected option be selected
+					 * TODO: add javascript to submit the form after the number of items per page is selected
+					 */
+					if($allowUserChangeEventLimit) {
+						echo <<<EOD
+				<form name="eventLimit" method="GET">
+					<input type="hidden" name="page" value="$currentPage" />
+					Elements per page:
+						<select name="itemLimit">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="20" selected>20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					<input type="submit" value="Change item limit" />
+				</form>
+EOD;
+					}
+					// TODO: add page selection
+				?>
+			</div>
 		</div>
 	</body>
 </html>
