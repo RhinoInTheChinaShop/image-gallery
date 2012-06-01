@@ -123,18 +123,19 @@ EOD;
 				<?php
 					/*
 					 * Add events per page control to page if the user is allowed to change the limit
-					 * TODO: make the currently selected option be selected
 					 * TODO: add javascript to submit the form after the number of items per page is selected
 					 */
+					$tempLimit = htmlentities($tempEventLimit);
 					$pageNumber = htmlentities($_GET["page"]);
 					if($allowUserChangeEventLimit) {
 						echo <<<EOD
 				<form name="eventLimit" method="GET">
 					Elements per page:
 						<select name="itemLimit">
+							<option value="$tempLimit">Current option: $tempLimit</option>
 							<option value="5">5</option>
 							<option value="10">10</option>
-							<option value="20" selected>20</option>
+							<option value="20">20</option>
 							<option value="50">50</option>
 							<option value="100">100</option>
 						</select>
@@ -149,7 +150,6 @@ EOD;
 					 * TODO: add checks to only display links that have items on the page
 					 * TODO: add last page link
 					 */
-					$tempLimit = htmlentities($tempEventLimit);
 					$prevPage = $pageNumber-1;
 					$nextPage = $pageNumber+1;
 					$firstListedPage = ($pageNumber - 5 < 0) ? 0 : $pageNumber - 5;
