@@ -18,6 +18,10 @@
 		exit;
 	}
 	
+	/*
+	 * Fetch authorization details of the current user,
+	 * and includes multiuse functions for pages.
+	 */
 	require("auth/fetch.php");
 	require("page.php");
 	
@@ -32,6 +36,9 @@
 	<body>
 		<h1>Image Gallery Home</h1>
 		<?php
+			/*
+			 * If the user is redirected to the homepage due to the result of an action, a message is displayed based on the output of the action.
+			 */
 			if(isset($_GET["action"])) {
 				$actionMessages = array("logoutSuccess"=>"You successfully logged out.", "loginSuccess"=>"You have successfully logged in.");
 				$actionMessage = $actionMessages[$_GET["action"]];
@@ -47,6 +54,9 @@ EOD;
 		<?php echo $homepageDescription; ?><hr />
 		<div class="left userLogin">
 			<?php
+				/*
+				 * Displays the user's details if the user is logged in, otherwise displays a login box.
+				 */
 				if($user) {
 					$realName = html_entity_decode($user["displayname"]);
 					$profilePicture = (isset($user["profilePic"]) || $user["profilePic"] !== "") ? "{$rootLocation}/pictures/?picture=".$user["profilePic"] : $defaultProfilePicture;
@@ -71,13 +81,16 @@ EOD;
 		</div>
 		<div id="events">
 			<?php
+				/*
+				 * Opens a connection to the database, if the database is not already open.
+				 */
 				if(!$db) {
 					if(!$db = sqlite_open($databaseLocation, 0666, $dbError)) {
 						die("Error connecting to the database: $dbError");
 					}
 				}
 				/*
-				 * turns an array of roles into a regex for any of the roles or public
+				 * turns an array of roles into a regex for any of the roles or public, made for users who are logged in.
 				 */
 				function rolesRegexGenerator($rs) {
 					$out = "";

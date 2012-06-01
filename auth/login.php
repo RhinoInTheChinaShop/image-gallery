@@ -1,4 +1,7 @@
 <?php
+	/*
+	 * Logs in the user, based on information sent from a form.
+	 */
 	require("../settings.php");
 	session_start();
 	session_regenerate_id();
