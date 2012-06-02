@@ -16,3 +16,14 @@
 		sqlite_create_function($db, 'regexp', 'my_sqlite_regexp',2);
 		return sqlite_query($database, $query, $method, $error);
 	}
+	
+	/*
+	 * turns an array of roles into a regex for any of the roles or public, made for users who are logged in.
+	*/
+	function rolesRegexGenerator($rs) {
+		$out = "";
+		foreach($rs as $r) {
+			$out .= ".*$r.*||";
+		}
+		return $out."public";
+	}
