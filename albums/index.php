@@ -43,6 +43,10 @@
 	$day = fetch_argument("day");
 	$event = fetch_argument("event");
 	
+	/*
+	 * Include the page for the deepest argument,
+	 * redirect to the homepage and display an error if no pages are selected.
+	 */
 	if($shot) {
 		include("shot.php");
 	}
