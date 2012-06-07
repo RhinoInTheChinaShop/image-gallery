@@ -27,3 +27,41 @@
 		}
 		return $out."public";
 	}
+	
+	/*
+	 * Returns the included ($iTags) and excluded ($eTags) tags as a regex for the input array.
+	 * Can be used for tags and people
+	 */
+	function parseTags($tags) {
+		foreach(explode(",", $tags) as $tag) {
+			if($tag[0] != "-") {
+				if(!$iTags) {
+					$iTags = "/$tag";
+				}
+				else {
+					$iTags = "|$tag";
+				}
+			}
+			else {
+				if(!$eTags) {
+					$iTags = "/$tag";
+				}
+				else {
+					$eTags = "|$tag";
+				}
+			}
+		}
+		if($iTags) {
+			$iTags = "/";
+		}
+		else {
+			$iTags = ".*";
+		}
+		if($eTags) {
+			$eTags = "/";
+		}
+		else {
+			$eTags = ".*";
+		}
+		return array(sqlite_escape_string($iTags), sqlite_escape_string($eTags));
+	}

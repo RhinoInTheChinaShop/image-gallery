@@ -17,18 +17,23 @@
 	 }
 	 
 	 /*
+	  * TODO: add die() if user is not allowed to view the event
+	  */
+	 
+	 /*
 	  * Extract extra arguments
 	  */
-	 $people = $_GET["people"] ? peopleRegexGenerator("none", $_GET["people"]) : peopleRegexGenerator("all");
+	 $people = $_GET["people"] ? $_GET["people"] : "";
 	 $location = $_GET["location"] ? "AND location = '".sqlite_escape_string($_GET["location"])."'" : null;
-	 $tags = $_GET["tags"] ? tagsRegexGenerator("none", $_GET["tags"]) : tagsRegexGenerator("all");
+	 $tags = $_GET["tags"] ? $_GET["tags"] : "";
+	 
+	 list ($includedPeople, $excludedPeople) = parseTags($people);
+	 list ($includedTags, $excludedTags) = parseTags($tags);
 	 
 	 /*
 	  * Run query
-	  * TODO: create regexp's in page.php for peopleRegexGenerator and tagsRegexGenerator above
-	  * TODO: add the permission regexp to the query
 	  */
-	 $query = sqlite_query($db, "SELECT * FROM days WHERE event=$event $location AND regexp(people, '$people') AND regexp(tags, '$tags')");
+	 $query = sqlite_regex_query($db, "SELECT * FROM days WHERE event=$event $location AND regexp(people, '$includedPeople') AND NOT regexp(people, '$excludedPeople') AND regexp(tags, '$includedTags') AND NOT regexp(tags, '$excludedTags')");
 	 
 	 /*
 	  * TODO: Process and display days, along with an "all" option
