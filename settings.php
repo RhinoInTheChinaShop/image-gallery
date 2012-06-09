@@ -56,6 +56,11 @@ EOD;
 	$allowUserChangeEventLimit = true;
 	
 	/*
+	 * If true, anyone can import pictures. (otherwise, the account requires import.event permissions)
+	 * This is recomended to be set to false, to protect space.
+	 */
+	$allowAnonImports = false;
+	/*
 	 * The number of events to display per page on the homepage
 	 * (can be changed by the user if $allowUserChangeEventLimit is set to true above)
 	 */
