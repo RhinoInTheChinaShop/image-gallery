@@ -1,0 +1,42 @@
+html, body {
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+
+#settingsLink {
+	float: right;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	margin: 5px;
+	padding: 5px;
+}
+
+#helpSection {
+	padding: 5px;
+	
+}
+
+#importedImages {
+	float: right;
+	padding: 10px;
+	-webkit-border-bottom-left-radius: 30px;
+	-moz-border-radius-bottomleft: 30px;
+	border-bottom-left-radius: 30px;
+}
+
+#eventPlayground {
+	
+}
+
+#settingsOverlay {
+	display: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+	background-color: rgba(0, 0, 0, .8);
+}
