@@ -40,7 +40,7 @@
 			 * If the user is redirected to the homepage due to the result of an action, a message is displayed based on the output of the action.
 			 */
 			if(isset($_GET["action"])) {
-				$actionMessages = array("logoutSuccess"=>"You successfully logged out.", "loginSuccess"=>"You have successfully logged in.", "noevent"=>"No event was specified.  Please select an event below.");
+				$actionMessages = array("logoutSuccess"=>"You successfully logged out.", "loginSuccess"=>"You have successfully logged in.", "noevent"=>"No event was specified.  Please select an event below.","importeventpermerror"=>"Your account doesn't have permission to import events.");
 				$actionMessage = $actionMessages[$_GET["action"]];
 				if($actionMessage) {
 					echo <<<EOD
