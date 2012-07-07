@@ -35,7 +35,7 @@ ajax({
  */
 
 function ajax(params) {
-    var httpRequest;
+    var httpRequest = false;
     if (window.XMLHttpRequest) {
         httpRequest = new XMLHttpRequest();
     }
