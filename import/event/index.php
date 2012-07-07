@@ -19,7 +19,7 @@
 	<head>
 		<title>Import Event</title>
 		<script type="text/javascript" src="<?php echo $rootLocation."resources/ajax.js"; ?>"></script>
-		<script type="text/javascript" src="<?php echo $rootLocation."resources/swfupload.js"; ?>></script>
+		<script type="text/javascript" src="<?php echo $rootLocation."resources/swfupload.js"; ?>"></script>
 		<script type="text/javascript" src="import.js"></script>
 		<link rel="stylesheet" type="text/css" href="import.css" />
 	</head>
