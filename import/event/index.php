@@ -19,7 +19,6 @@
 	<head>
 		<title>Import Event</title>
 		<script type="text/javascript" src="<?php echo $rootLocation."resources/ajax.js"; ?>"></script>
-		<script type="text/javascript" src="<?php echo $rootLocation."resources/swfupload.js"; ?>"></script>
 		<script type="text/javascript" src="import.js"></script>
 		<link rel="stylesheet" type="text/css" href="import.css" />
 	</head>
@@ -42,11 +41,6 @@
 				<h1>Create a New Event</h1>
 				<form name="newEvent" id="newEvent">
 					Event Name: <input type="text" name="name" /><br />
-					Photo Upload Method:
-					<select name="uploadMethod">
-						<!-- Hardcoded for now, later it can be changed -->
-						<option value="http">Web Upload</option>
-					</select>
 				</form>
 			</div>
 		</div>
