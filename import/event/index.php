@@ -18,6 +18,8 @@
 <html>
 	<head>
 		<title>Import Event</title>
+		<script type="text/javascript" src="<?php echo $rootLocation."resources/ajax.js"; ?>"></script>
+		<script type="text/javascript" src="<?php echo $rootLocation."resources/swfupload.js"; ?>></script>
 		<script type="text/javascript" src="import.js"></script>
 		<link rel="stylesheet" type="text/css" href="import.css" />
 	</head>
@@ -25,7 +27,7 @@
 		<div id="settingsLink">
 			<!-- square-ish link to settings popup -->
 		</div>
-		<div id="helpSection">
+		<div id="helpSection" data-hidden="false">
 			<!-- help information -->
 		</div>
 		<div id="importedImages">
@@ -36,7 +38,17 @@
 			<!-- area to mess around with images -->
 		</div>
 		<div id="settingsOverlay">
-			<!-- full page overlay for settings -->
+			<div id="newEventForm">
+				<h1>Create a New Event</h1>
+				<form name="newEvent" id="newEvent">
+					Event Name: <input type="text" name="name" /><br />
+					Photo Upload Method:
+					<select name="uploadMethod">
+						<!-- Hardcoded for now, later it can be changed -->
+						<option value="http">Web Upload</option>
+					</select>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
